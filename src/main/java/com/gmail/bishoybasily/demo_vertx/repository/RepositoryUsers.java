@@ -8,6 +8,7 @@ import io.reactivex.functions.Function;
 import io.vertx.reactivex.sqlclient.Row;
 
 import javax.inject.Inject;
+import java.util.UUID;
 
 /**
  * @author bishoybasily
@@ -22,12 +23,18 @@ public class RepositoryUsers {
         this.helperSQL = helperSQL;
     }
 
-    public Single<User> one(String id) {
+    public Single<User> read(String id) {
         return helperSQL.execute("select id, name from users where id=?", userMapper(), id).singleOrError();
     }
 
-    public Observable<User> all() {
+    public Observable<User> read() {
         return helperSQL.execute("select id, name from users", userMapper());
+    }
+
+    public Single<User> create(User user) {
+        user.setId(UUID.randomUUID().toString());
+        return helperSQL.execute("insert into users (id, name) values (?, ?)", user.getId(), user.getName())
+                .map(rows -> user);
     }
 
     private Function<Row, User> userMapper() {
