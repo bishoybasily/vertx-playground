@@ -1,6 +1,7 @@
 package com.gmail.bishoybasily.demo_vertx;
 
 
+import com.gmail.bishoybasily.demo_vertx.utils.ObjectUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -29,14 +30,26 @@ public class HelperSQL {
     public <T> Observable<T> execute(String sql, Function<Row, T> mapper) {
         return pool.rxGetConnection()
                 .flatMap(conn -> conn.query(sql).rxExecute())
-                .flatMapObservable(Observable::fromIterable)
+                .toMaybe()
+                .flatMapObservable(rows -> {
+                    if (ObjectUtils.isEmpty(rows))
+                        return Observable.fromArray();
+                    return Observable.fromIterable(rows);
+                })
+                .switchIfEmpty(Observable.fromArray())
                 .map(mapper);
     }
 
     public <T> Observable<T> execute(String sql, Function<Row, T> mapper, Object... args) {
         return pool.rxGetConnection()
                 .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)))
-                .flatMapObservable(Observable::fromIterable)
+                .toMaybe()
+                .flatMapObservable(rows -> {
+                    if (ObjectUtils.isEmpty(rows))
+                        return Observable.fromArray();
+                    return Observable.fromIterable(rows);
+                })
+                .switchIfEmpty(Observable.fromArray())
                 .map(mapper);
     }
 

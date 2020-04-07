@@ -2,6 +2,7 @@ package com.gmail.bishoybasily.demo_vertx.di;
 
 import com.gmail.bishoybasily.demo_vertx.controller.Controller;
 import com.gmail.bishoybasily.demo_vertx.controller.ControllerUsers;
+import com.gmail.bishoybasily.demo_vertx.service.ServiceUsers;
 import com.gmail.bishoybasily.demo_vertx.utils.ObjectUtils;
 import dagger.Module;
 import dagger.Provides;
@@ -53,8 +54,8 @@ public class ModuleHttpServer {
     @ScopeMain
     @IntoSet
     @Provides
-    public Controller controllerUsers() {
-        return new ControllerUsers();
+    public Controller controllerUsers(ServiceUsers serviceUsers) {
+        return new ControllerUsers(serviceUsers);
     }
 
 }
