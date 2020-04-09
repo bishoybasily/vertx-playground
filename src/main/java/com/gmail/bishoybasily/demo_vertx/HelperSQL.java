@@ -1,7 +1,6 @@
 package com.gmail.bishoybasily.demo_vertx;
 
 
-import com.gmail.bishoybasily.demo_vertx.utils.ObjectUtils;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -23,33 +22,21 @@ public class HelperSQL {
 
     public Single<Integer> execute(String sql, Object... args) {
         return pool.rxGetConnection()
-                .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)))
+                .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)).doFinally(conn::close))
                 .map(SqlResult::rowCount);
     }
 
     public <T> Observable<T> execute(String sql, Function<Row, T> mapper) {
         return pool.rxGetConnection()
-                .flatMap(conn -> conn.query(sql).rxExecute())
-                .toMaybe()
-                .flatMapObservable(rows -> {
-                    if (ObjectUtils.isEmpty(rows))
-                        return Observable.fromArray();
-                    return Observable.fromIterable(rows);
-                })
-                .switchIfEmpty(Observable.fromArray())
+                .flatMap(conn -> conn.query(sql).rxExecute().doFinally(conn::close))
+                .flatMapObservable(Observable::fromIterable)
                 .map(mapper);
     }
 
     public <T> Observable<T> execute(String sql, Function<Row, T> mapper, Object... args) {
         return pool.rxGetConnection()
-                .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)))
-                .toMaybe()
-                .flatMapObservable(rows -> {
-                    if (ObjectUtils.isEmpty(rows))
-                        return Observable.fromArray();
-                    return Observable.fromIterable(rows);
-                })
-                .switchIfEmpty(Observable.fromArray())
+                .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)).doFinally(conn::close))
+                .flatMapObservable(Observable::fromIterable)
                 .map(mapper);
     }
 

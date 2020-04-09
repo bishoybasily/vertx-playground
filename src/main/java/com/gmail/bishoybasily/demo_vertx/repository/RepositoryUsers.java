@@ -32,7 +32,9 @@ public class RepositoryUsers {
     }
 
     public Single<User> create(User user) {
+
         user.setId(UUID.randomUUID().toString());
+
         return helperSQL.execute("insert into users (id, name) values (?, ?)", user.getId(), user.getName())
                 .map(rows -> user);
     }

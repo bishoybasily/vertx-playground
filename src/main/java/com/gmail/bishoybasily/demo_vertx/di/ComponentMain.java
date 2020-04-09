@@ -1,13 +1,11 @@
 package com.gmail.bishoybasily.demo_vertx.di;
 
-import com.gmail.bishoybasily.demo_vertx.HelperSQL;
 import dagger.Component;
-import io.vertx.reactivex.core.Vertx;
-import io.vertx.reactivex.core.http.HttpServer;
-import io.vertx.reactivex.sqlclient.Pool;
 import org.flywaydb.core.Flyway;
 
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * @author bishoybasily
@@ -22,17 +20,9 @@ import java.util.Set;
 })
 public interface ComponentMain {
 
-    Vertx vertx();
-
-    HelperSQL helperSql();
-
-    Pool pool();
-
-    HttpServer httpServer();
+    Flyway flyway();
 
     Set<Thread> closures();
-
-    Flyway flyway();
 
     class Factory {
 
@@ -47,6 +37,10 @@ public interface ComponentMain {
                 }
 
             return componentMain;
+        }
+
+        public static void run(Consumer<ComponentMain>... consumers) {
+            Stream.of(consumers).forEach(c -> c.accept(instance()));
         }
 
     }

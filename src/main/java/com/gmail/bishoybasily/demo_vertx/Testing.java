@@ -9,9 +9,16 @@ import com.gmail.bishoybasily.demo_vertx.di.ComponentMain;
  */
 public class Testing {
 
+    /**
+     * kindly not that, the consumers sequence matters
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        ComponentMain.Factory.instance().flyway().migrate();
-        ComponentMain.Factory.instance().closures().forEach(Runtime.getRuntime()::addShutdownHook);
+        ComponentMain.Factory.run(
+                it -> it.flyway().migrate(),
+                it -> it.closures().forEach(Runtime.getRuntime()::addShutdownHook)
+        );
     }
 
 }

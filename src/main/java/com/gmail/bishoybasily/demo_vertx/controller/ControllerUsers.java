@@ -27,7 +27,7 @@ public class ControllerUsers implements Controller {
 
     @Override
     public void handle(HttpServerRequest request, HttpServerResponse response) {
-        serviceUsers.read().subscribe(it -> response.end(Json.encode(it)));
+        serviceUsers.read().toList().map(Json::encode).subscribe(response::end, err -> response.end(err.getMessage()));
     }
 
 }
