@@ -1,8 +1,10 @@
 package com.gmail.bishoybasily.demo_vertx.controller;
 
+import io.vertx.core.Handler;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.reactivex.core.http.HttpServerRequest;
 import io.vertx.reactivex.core.http.HttpServerResponse;
+import io.vertx.reactivex.ext.web.RoutingContext;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,9 +18,11 @@ public interface Controller {
 
     Metadata getMetadata();
 
-    default void handle(HttpServerRequest request, HttpServerResponse response) {
-
+    default Handler<RoutingContext> getHandler() {
+        return event -> handle(event.request(), event.response());
     }
+
+    void handle(HttpServerRequest request, HttpServerResponse response);
 
     @Data
     @EqualsAndHashCode(of = {"method", "path"})

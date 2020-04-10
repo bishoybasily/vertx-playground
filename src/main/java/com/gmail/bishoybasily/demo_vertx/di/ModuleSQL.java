@@ -43,7 +43,7 @@ public class ModuleSQL {
     @Provides
     public PoolOptions poolOptions() {
         return new PoolOptions()
-                .setMaxSize(5);
+                .setMaxSize(15);
     }
 
     @ScopeMain
