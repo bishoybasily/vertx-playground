@@ -24,14 +24,14 @@ public interface ComponentMain {
 
     Set<Thread> closures();
 
-    class Factory {
+    class Initializer {
 
         private static ComponentMain componentMain;
 
         public static ComponentMain instance() {
 
             if (componentMain == null)
-                synchronized (Factory.class) {
+                synchronized (Initializer.class) {
                     if (componentMain == null)
                         componentMain = DaggerComponentMain.builder().build();
                 }

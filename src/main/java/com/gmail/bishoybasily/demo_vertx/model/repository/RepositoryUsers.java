@@ -1,7 +1,7 @@
-package com.gmail.bishoybasily.demo_vertx.repository;
+package com.gmail.bishoybasily.demo_vertx.model.repository;
 
 import com.gmail.bishoybasily.demo_vertx.HelperSQL;
-import com.gmail.bishoybasily.demo_vertx.User;
+import com.gmail.bishoybasily.demo_vertx.model.entity.User;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;

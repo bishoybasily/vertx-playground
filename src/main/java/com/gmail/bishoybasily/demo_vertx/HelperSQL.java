@@ -26,13 +26,6 @@ public class HelperSQL {
                 .map(SqlResult::rowCount);
     }
 
-    public <T> Observable<T> execute(String sql, Function<Row, T> mapper) {
-        return pool.rxGetConnection()
-                .flatMap(conn -> conn.query(sql).rxExecute().doFinally(conn::close))
-                .flatMapObservable(Observable::fromIterable)
-                .map(mapper);
-    }
-
     public <T> Observable<T> execute(String sql, Function<Row, T> mapper, Object... args) {
         return pool.rxGetConnection()
                 .flatMap(conn -> conn.preparedQuery(sql).rxExecute(Tuple.wrap(args)).doFinally(conn::close))

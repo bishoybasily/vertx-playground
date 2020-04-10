@@ -2,7 +2,7 @@ package com.gmail.bishoybasily.demo_vertx.di;
 
 import com.gmail.bishoybasily.demo_vertx.controller.Controller;
 import com.gmail.bishoybasily.demo_vertx.controller.ControllerUsers;
-import com.gmail.bishoybasily.demo_vertx.service.ServiceUsers;
+import com.gmail.bishoybasily.demo_vertx.model.service.ServiceUsers;
 import com.gmail.bishoybasily.demo_vertx.utils.ObjectUtils;
 import dagger.Module;
 import dagger.Provides;

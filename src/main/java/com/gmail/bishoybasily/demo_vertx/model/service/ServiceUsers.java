@@ -1,7 +1,7 @@
-package com.gmail.bishoybasily.demo_vertx.service;
+package com.gmail.bishoybasily.demo_vertx.model.service;
 
-import com.gmail.bishoybasily.demo_vertx.User;
-import com.gmail.bishoybasily.demo_vertx.repository.RepositoryUsers;
+import com.gmail.bishoybasily.demo_vertx.model.entity.User;
+import com.gmail.bishoybasily.demo_vertx.model.repository.RepositoryUsers;
 import io.reactivex.Observable;
 
 import javax.inject.Inject;

@@ -1,6 +1,6 @@
 package com.gmail.bishoybasily.demo_vertx.controller;
 
-import com.gmail.bishoybasily.demo_vertx.service.ServiceUsers;
+import com.gmail.bishoybasily.demo_vertx.model.service.ServiceUsers;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.Json;
 import io.vertx.reactivex.core.http.HttpServerRequest;

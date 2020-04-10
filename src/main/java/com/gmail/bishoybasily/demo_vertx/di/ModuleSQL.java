@@ -66,7 +66,7 @@ public class ModuleSQL {
                 .port(3306)
                 .username("root")
                 .password("toor")
-                .database("demo_vertx")
+                .database("simple_castle_accounts")
                 .build();
     }
 

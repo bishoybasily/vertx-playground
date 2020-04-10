@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.demo_vertx;
+package com.gmail.bishoybasily.demo_vertx.model.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
