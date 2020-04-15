@@ -22,14 +22,23 @@
         <vertx.version>3.9.0</vertx.version>
         <junit-jupiter.version>5.4.0</junit-jupiter.version>
 
-        <main-class>com.gmail.bishoybasily.demo_vertx.temp.Main</main-class>
+        <main-class>com.gmail.bishoybasily.playground.vertx.Main</main-class>
 
         <dagger.version>2.27</dagger.version>
         <flyway.version>6.3.1</flyway.version>
         <lombok.version>1.18.10</lombok.version>
+        <reactor.version>3.3.4.RELEASE</reactor.version>
+
+
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.13.1</version>
+        </dependency>
 
         <dependency>
             <groupId>com.google.dagger</groupId>
@@ -63,9 +72,22 @@
         </dependency>
 
         <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rx-java2</artifactId>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+            <version>${reactor.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <version>${reactor.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>io.vertx</groupId>-->
+        <!--            <artifactId>vertx-rx-java2</artifactId>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
@@ -121,6 +143,58 @@
 
     <build>
         <plugins>
+
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>properties-maven-plugin</artifactId>-->
+            <!--                <version>1.0.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>initialize</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>read-project-properties</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <files>-->
+            <!--                                <file>src/main/resources/intro_config.properties</file>-->
+            <!--                            </files>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
+            <!--            <plugin>-->
+            <!--                <groupId>org.jooq</groupId>-->
+            <!--                <artifactId>jooq-codegen-maven</artifactId>-->
+            <!--                <version>3.13.1</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <phase>generate-sources</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>generate</goal>-->
+            <!--                        </goals>-->
+            <!--                        <configuration>-->
+            <!--                            <jdbc>-->
+            <!--                                <driver>${db.driver}</driver>-->
+            <!--                                <url>${db.url}</url>-->
+            <!--                                <user>${db.username}</user>-->
+            <!--                                <password>${db.password}</password>-->
+            <!--                            </jdbc>-->
+            <!--                            <generator>-->
+            <!--                                <database>-->
+            <!--                                    <includeIndexes>false</includeIndexes>-->
+            <!--                                    <inputSchema>demo_vertx</inputSchema>-->
+            <!--                                </database>-->
+            <!--                                <target>-->
+            <!--                                    <packageName>com.gmail.bishoybasily.playground.vertx.generated</packageName>-->
+            <!--                                    <directory>src/main/java</directory>-->
+            <!--                                </target>-->
+            <!--                            </generator>-->
+            <!--                        </configuration>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
+
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
