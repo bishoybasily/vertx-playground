@@ -1,44 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.gmail.bishoybasily</groupId>
-    <artifactId>demo-vertx</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
+    <artifactId>vertx</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <properties>
 
-        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-        <!--        <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>-->
-        <!--        <main.verticle>com.gmail.bishoybasily.demo_vertx.MainVerticle</main.verticle>-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
-        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
-        <java.version>11</java.version>
-        <vertx.version>3.9.0</vertx.version>
-        <junit-jupiter.version>5.4.0</junit-jupiter.version>
-
-        <main-class>com.gmail.bishoybasily.playground.vertx.Main</main-class>
-
+        <vertx.version>4.0.3</vertx.version>
         <dagger.version>2.27</dagger.version>
-        <flyway.version>6.3.1</flyway.version>
         <lombok.version>1.18.10</lombok.version>
-        <reactor.version>3.3.4.RELEASE</reactor.version>
 
+        <graal.version>21.0.0.2</graal.version>
+
+        <vertx.verticle>com.gmail.bishoybasily.vertx.VerticleMain</vertx.verticle>
+        <!--        <vertx.launcher>com.gmail.bishoybasily.vertx.Main</vertx.launcher>-->
+
+        <vertx-maven-plugin.version>1.0.13</vertx-maven-plugin.version>
 
     </properties>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-dependencies</artifactId>
+                <version>${vertx.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
-
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>3.13.1</version>
-        </dependency>
 
         <dependency>
             <groupId>com.google.dagger</groupId>
@@ -53,18 +50,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
@@ -72,193 +57,68 @@
         </dependency>
 
         <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>${reactor.version}</version>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-stomp</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-            <version>${reactor.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.vertx</groupId>-->
+        <!--            <artifactId>vertx-infinispan</artifactId>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.vertx</groupId>-->
+        <!--            <artifactId>vertx-config</artifactId>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>io.vertx</groupId>
-            <artifactId>vertx-web-graphql</artifactId>
+            <artifactId>vertx-config-yaml</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-service-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-mysql-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-rabbitmq-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-auth-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-mongo-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-
+        <!--        <dependency>-->
+        <!--            <groupId>io.vertx</groupId>-->
+        <!--            <artifactId>vertx-core</artifactId>-->
+        <!--        </dependency>-->
     </dependencies>
-
     <build>
         <plugins>
-
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <groupId>io.fabric8</groupId>
+                <artifactId>vertx-maven-plugin</artifactId>
+                <version>${vertx-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <phase>initialize</phase>
+                        <id>vmp</id>
                         <goals>
-                            <goal>read-project-properties</goal>
+                            <goal>initialize</goal>
+                            <goal>package</goal>
                         </goals>
-                        <configuration>
-                            <files>
-                                <file>src/main/resources/intro_config.properties</file>
-                            </files>
-                        </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>3.13.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <jdbc>
-                                <driver>${db.driver}</driver>
-                                <url>${db.url}</url>
-                                <user>${db.username}</user>
-                                <password>${db.password}</password>
-                            </jdbc>
-                            <generator>
-                                <database>
-                                    <includeIndexes>false</includeIndexes>
-                                    <inputSchema>demo_vertx</inputSchema>
-                                </database>
-                                <target>
-                                    <packageName>annotations.com.gmail.bishoybasily.playground.vertx.model.entity
-                                    </packageName>
-                                    <directory>target/generated-sources</directory>
-                                </target>
-                            </generator>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <release>${java.version}</release>
+                    <redeploy>true</redeploy>
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven-shade-plugin.version}</version>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
+                <version>${graal.version}</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
                         <goals>
-                            <goal>shade</goal>
+                            <goal>native-image</goal>
                         </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>${main-class}</mainClass>
-                                    <!--                                    <manifestEntries>-->
-                                    <!--                                        <Main-Class>io.vertx.core.Launcher</Main-Class>-->
-                                    <!--                                        <Main-Verticle>${main.verticle}</Main-Verticle>-->
-                                    <!--                                    </manifestEntries>-->
-                                </transformer>
-                                <transformer
-                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                    <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>
-                                </transformer>
-                            </transformers>
-                            <!--                            <artifactSet>-->
-                            <!--                            </artifactSet>-->
-                            <!--                            <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>-->
-                            <outputFile>${project.build.directory}/${project.artifactId}.jar</outputFile>
-                        </configuration>
+                        <phase>package</phase>
                     </execution>
                 </executions>
+                <configuration>
+                    <imageName>${project.name}</imageName>
+                    <mainClass>io.vertx.core.Launcher</mainClass>
+                    <buildArgs>-H:+PrintClassInitialization -H:+ReportExceptionStackTraces --no-fallback</buildArgs>
+                </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-            </plugin>
-            <!--            <plugin>-->
-            <!--                <groupId>org.codehaus.mojo</groupId>-->
-            <!--                <artifactId>exec-maven-plugin</artifactId>-->
-            <!--                <version>${exec-maven-plugin.version}</version>-->
-            <!--                <configuration>-->
-            <!--                    <mainClass>io.vertx.core.Launcher</mainClass>-->
-            <!--                    <arguments>-->
-            <!--                        <argument>run</argument>-->
-            <!--                        <argument>${main.verticle}</argument>-->
-            <!--                    </arguments>-->
-            <!--                </configuration>-->
-            <!--            </plugin>-->
         </plugins>
     </build>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-stack-depchain</artifactId>
-                <version>${vertx.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
