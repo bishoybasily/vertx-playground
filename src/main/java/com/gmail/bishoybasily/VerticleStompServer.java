@@ -16,7 +16,6 @@ public class VerticleStompServer extends AbstractVerticle {
     @Override
     public void start(Promise<Void> promise) {
 
-
         startStompServer()
                 .onSuccess(it -> {
                     promise.complete();
