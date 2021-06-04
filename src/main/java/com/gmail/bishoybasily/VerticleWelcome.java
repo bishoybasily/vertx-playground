@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.vertx;
+package com.gmail.bishoybasily;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;

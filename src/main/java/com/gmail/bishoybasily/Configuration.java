@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.vertx;
+package com.gmail.bishoybasily;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -11,11 +11,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Configuration {
 
-    private Http http;
+    private Service http;
+    private Service stomp;
 
     @Data
     @Accessors(chain = true)
-    public static class Http {
+    public static class Service {
 
         private Integer port;
 

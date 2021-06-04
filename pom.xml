@@ -18,8 +18,8 @@
 
         <graal.version>21.0.0.2</graal.version>
 
-        <vertx.verticle>com.gmail.bishoybasily.vertx.VerticleMain</vertx.verticle>
-        <!--        <vertx.launcher>com.gmail.bishoybasily.vertx.Main</vertx.launcher>-->
+        <vertx.verticle>com.gmail.bishoybasily.VerticleMain</vertx.verticle>
+        <vertx.launcher>io.vertx.core.Launcher</vertx.launcher>
 
         <vertx-maven-plugin.version>1.0.13</vertx-maven-plugin.version>
 
@@ -114,8 +114,7 @@
                 </executions>
                 <configuration>
                     <imageName>${project.name}</imageName>
-                    <mainClass>io.vertx.core.Launcher</mainClass>
-                    <buildArgs>-H:+PrintClassInitialization -H:+ReportExceptionStackTraces --no-fallback</buildArgs>
+                    <mainClass>${vertx.launcher}</mainClass>
                 </configuration>
             </plugin>
         </plugins>

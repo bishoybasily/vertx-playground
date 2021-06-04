@@ -1,4 +1,4 @@
-package com.gmail.bishoybasily.vertx;
+package com.gmail.bishoybasily;
 
 import io.vertx.config.ConfigRetriever;
 import io.vertx.config.ConfigRetrieverOptions;
@@ -8,11 +8,25 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
+import lombok.SneakyThrows;
+
+import java.util.concurrent.Executors;
 
 public class VerticleMain extends AbstractVerticle {
 
     @Override
     public void start(Promise<Void> promise) {
+
+        Executors.newWorkStealingPool().submit(new Runnable() {
+
+            @SneakyThrows
+            @Override
+            public void run() {
+                Thread.sleep(5000);
+                vertx.close();
+            }
+
+        });
 
         getConfiguration()
                 .map(it -> new DeploymentOptions().setConfig(it))
