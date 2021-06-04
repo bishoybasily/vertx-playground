@@ -12,9 +12,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <vertx.version>4.0.3</vertx.version>
+        <vertx.version>4.1.0</vertx.version>
         <dagger.version>2.27</dagger.version>
         <lombok.version>1.18.10</lombok.version>
+        <junit-jupiter.version>5.7.0</junit-jupiter.version>
 
         <graal.version>21.0.0.2</graal.version>
 
@@ -24,17 +25,6 @@
         <vertx-maven-plugin.version>1.0.13</vertx-maven-plugin.version>
 
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.vertx</groupId>
-                <artifactId>vertx-dependencies</artifactId>
-                <version>${vertx.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
 
         <dependency>
@@ -80,7 +70,39 @@
         <!--            <groupId>io.vertx</groupId>-->
         <!--            <artifactId>vertx-core</artifactId>-->
         <!--        </dependency>-->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-auth-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-dependencies</artifactId>
+                <version>${vertx.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
