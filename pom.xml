@@ -151,39 +151,14 @@
                                     -cluster \
                                     -Djava.net.preferIPv4Stack=true \
                                     -Dvertx.jgroups.config=default-configs/default-jgroups-kubernetes.xml \
-                                    -Djgroups.dns.query=vertx-infnispan
+                                    -Djgroups.dns.query=vertx-infinispan
                                 </cmd>
                                 <tags>
                                     <tag>latest</tag>
                                 </tags>
                             </build>
-                            <!--                            <run>-->
-                            <!--                                <ports>-->
-                            <!--                                    <port>8080:8080</port>-->
-                            <!--                                    <port>9090:9090</port>-->
-                            <!--                                </ports>-->
-                            <!--                            </run>-->
                         </image>
                     </images>
-                    <!--                    <resources>-->
-                    <!--                        <labels>-->
-                    <!--                            <all>-->
-                    <!--                                <property>-->
-                    <!--                                    <name>cluster</name>-->
-                    <!--                                    <value>vertx-infnispan</value>-->
-                    <!--                                </property>-->
-                    <!--                            </all>-->
-                    <!--                        </labels>-->
-                    <!--                    </resources>-->
-                    <!--                    <enricher>-->
-                    <!--                        <config>-->
-                    <!--                            <fmp-service>-->
-                    <!--                                <name>vertx</name>-->
-                    <!--                                <type>NodePort</type>-->
-                    <!--                                <multiPort>true</multiPort>-->
-                    <!--                            </fmp-service>-->
-                    <!--                        </config>-->
-                    <!--                    </enricher>-->
                 </configuration>
                 <executions>
                     <execution>
