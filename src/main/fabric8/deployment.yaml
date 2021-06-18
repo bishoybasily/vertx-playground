@@ -1,0 +1,18 @@
+---
+kind: Deployment
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        cluster: vertx-infnispan
+    spec:
+      containers:
+        - name: vertx
+          imagePullPolicy: Always
+

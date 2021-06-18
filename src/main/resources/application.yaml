@@ -1,5 +1,5 @@
 http:
-  port: 8080
+  port: ${HTTP_PORT:8080}
 stomp:
   port: 9090
 

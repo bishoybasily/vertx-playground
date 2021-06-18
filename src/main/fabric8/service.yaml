@@ -1,0 +1,14 @@
+---
+kind: Service
+metadata:
+  name: vertx
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+    - name: stopm
+      port: 9090
+      protocol: TCP
+  type: LoadBalancer

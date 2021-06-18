@@ -1,0 +1,81 @@
+version: '3.7'
+
+services:
+
+#  mysql:
+#    container_name: mysql
+#    image: mysql:8
+#    ports:
+#      - 3306:3306
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=toor
+#    networks:
+#      - vertx
+
+#  vertx1:
+#    container_name: vertx1
+#    image: vertx
+#    ports:
+#      - 5050:5050
+#    environment:
+#      - HTTP_PORT=5050
+#    networks:
+#      - vertx
+#
+#  vertx2:
+#    container_name: vertx2
+#    image: vertx
+#    ports:
+#      - 7070:7070
+#    environment:
+#      - HTTP_PORT=7070
+#    networks:
+#      - vertx
+
+#  cluster:
+#    container_name: server
+#    image: jboss/infinispan-server:9.4.1.Final
+#    command:
+#      - cloud
+#      - -Djboss.default.jgroups.stack=kubernetes
+#    ports:
+#      - 8888:8888
+#      - 8080:8080
+#      - 9090:9090
+#      - 11222:11222
+#    networks:
+#      - vertx
+
+  zoo1:
+    image: zookeeper:3.7.0
+    restart: always
+    hostname: zoo1
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+  zoo2:
+    image: zookeeper:3.7.0
+    restart: always
+    hostname: zoo2
+    ports:
+      - 2182:2181
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+  zoo3:
+    image: zookeeper:3.7.0
+    restart: always
+    hostname: zoo3
+    ports:
+      - 2183:2181
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181
+
+networks:
+  vertx:
+    name: vertx
